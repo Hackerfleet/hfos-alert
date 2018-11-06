@@ -33,19 +33,19 @@ AlertManager
 
 from circuits import Event
 
-from hfos.component import ConfigurableComponent, handler, authorizedevent
-from hfos.logger import error, warn, verbose, critical, events
-from hfos.debugger import cli_register_event
-from hfos.events.client import broadcast, send
+from isomer.component import ConfigurableComponent, handler, authorized_event
+from isomer.logger import error, warn, verbose, critical, events
+from isomer.debugger import cli_register_event
+from isomer.events.client import broadcast, send
 
 
 # TODO: The client/backend communication overlaps with the notification system and should be separated
 
-class trigger(authorizedevent):
+class trigger(authorized_event):
     """Triggers an Alert"""
 
 
-class cancel(authorizedevent):
+class cancel(authorized_event):
     """Cancels an Alert"""
 
 
@@ -91,7 +91,7 @@ class Manager(ConfigurableComponent):
     * alert broadcasts
     """
 
-    channel = "hfosweb"
+    channel = 'isomer-web'
 
     def __init__(self, *args):
         super(Manager, self).__init__("ALERT", *args)
@@ -194,7 +194,7 @@ class Manager(ConfigurableComponent):
 
     def _record_alert(self, event, alert):
         alert['reference_frame'] = self.referenceframe
-        if isinstance(event, authorizedevent):
+        if isinstance(event, authorized_event):
             alert['originator'] = event.user.uuid
         else:
             alert['originator'] = 'SYSTEM'
