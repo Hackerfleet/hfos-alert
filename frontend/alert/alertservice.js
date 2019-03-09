@@ -33,7 +33,7 @@
  */
 
 class alertservice {
-    
+
     constructor(user, notification, interval, timeout, socket, rootscope, navbar) {
         this.user = user;
         this.notification = notification;
@@ -53,7 +53,7 @@ class alertservice {
 
         let self = this;
 
-        this.blink_stop = function() {
+        this.blink_stop = function () {
             $('#btnalert').css('color', '');
             self.blink_state = 0;
             self.interval.cancel(self.blinker);
@@ -63,8 +63,8 @@ class alertservice {
         this.blink_func = function () {
             let state = self.blink_state;
             console.log('Blinkstate:', state);
-            
-            if  (state === 1) {
+
+            if (state === 1) {
                 $('#btnalert').css('color', '#f00');
                 self.blink_state++;
             } else if (state === 2) {
@@ -73,7 +73,7 @@ class alertservice {
             }
         };
 
-        this.toggle_alert = function() {
+        this.toggle_alert = function () {
             console.log('[ALERT] Triggering', self.triggered);
             let delay;
 
@@ -97,12 +97,12 @@ class alertservice {
             this.alert = this.timeout(this.send_alert, delay, false, msg);
         };
 
-        this.send_alert = function(msg) {
+        this.send_alert = function (msg) {
             self.socket.send(msg);
             self.action = null;
         };
 
-        this.untrigger = function() {
+        this.untrigger = function () {
             console.log('[ALERT] Cancelling trigger');
             if (this.action !== null) {
                 this.notification.add('warning', 'Hold pressed', 'Keep this button pressed longer to trigger an alert change.', 5);
@@ -110,7 +110,7 @@ class alertservice {
             this.timeout(self.timeout.cancel, 100, false, self.alert);
         };
 
-        this.socket.listen('hfos.alert.manager', function(msg) {
+        this.socket.listen('hfos.alert.manager', function (msg) {
             if (msg.action === 'trigger') {
                 self.triggered = true;
                 self.notification.add('danger', msg.data.title, msg.data.message, 30);

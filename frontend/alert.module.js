@@ -27,7 +27,7 @@
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 
-import { routing } from './alert.config.js';
+import {routing} from './alert.config.js';
 
 import './alert/alert.scss';
 
@@ -39,5 +39,6 @@ export default angular
     .config(routing)
     .service('alertservice', alertserviceclass)
     .directive('alertbutton', alertbutton)
-    .run(function (alertservice) {})
+    .run(function (alertservice) {
+    })
     .name;

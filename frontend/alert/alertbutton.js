@@ -33,7 +33,7 @@ let alertbutton = function () {
         restrict: 'E',
         scope: {},
         template: alertbuttontemplate,
-        controller: function($scope, alertservice) {
+        controller: function ($scope, alertservice) {
             console.log('[ALERTBUTTON] Running');
             $scope.alert = alertservice;
         }
