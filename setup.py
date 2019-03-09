@@ -55,7 +55,7 @@ An alerting system to notify system users.
 This software package is a plugin module for HFOS.
 """,
     dependency_links=[],
-    install_requires=['isomer>=1.0.0'],
+    install_requires=['isomer>=1.0'],
     entry_points="""[isomer.components]
     alert=isomer.alert.manager:Manager
 [isomer.schemata]
